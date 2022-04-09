@@ -1,0 +1,18 @@
+pre-push:
+  parallel: true
+  commands:
+    linter:
+      run: flutter analyze
+
+pre-commit:
+  parallel: true
+  commands:
+    markdown-link-check:
+      glob: '*.md'
+      run: npx markdown-link-check {staged_files}
+    linter:
+      run: flutter analyze
+    pretty:
+      files: git diff --name-only @{push}
+      glob: "*.dart"
+      run: flutter format {files}
