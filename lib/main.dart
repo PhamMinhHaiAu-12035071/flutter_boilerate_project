@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilerate_project/app_bloc_observer.dart';
 import 'package:flutter_boilerate_project/configs/dependency_injection/injection.dart';
 import 'package:flutter_boilerate_project/configs/url/url_strategy.dart';
+import 'package:flutter_boilerate_project/modules/theme/business_logic/theme_bloc.dart';
+import 'package:flutter_boilerate_project/modules/theme/constants/app_themes.dart';
 import 'package:flutter_boilerate_project/routers/e_route_information_parser.dart';
 import 'package:flutter_boilerate_project/routers/e_router_delegate.dart';
 import 'package:flutter_boilerate_project/routers/navigation_cubit.dart';
@@ -10,7 +14,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   await configureDependencies();
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+    blocObserver: getIt<AppBlocObserver>(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,11 +31,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: routeInformationParser,
-      routerDelegate: routerDelegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<ThemeBloc>()),
+      ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (_, state) {
+          return MaterialApp.router(
+            title: 'Flutter Demo',
+            theme: appThemeData[state.lightTheme],
+            darkTheme: appThemeData[state.darkTheme],
+            debugShowCheckedModeBanner: false,
+            routeInformationParser: routeInformationParser,
+            routerDelegate: routerDelegate,
+          );
+        },
+      ),
     );
   }
 }
