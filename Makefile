@@ -6,3 +6,7 @@ help: ## Show this help.
 install: ## install all dependencies
 	npm install \
 	&& flutter pub get
+
+.PHONY: rebuild ## clean and generate file *.g.dart again
+rebuild:
+	flutter pub run build_runner clean && flutter pub run build_runner build --delete-conflicting-outputs
