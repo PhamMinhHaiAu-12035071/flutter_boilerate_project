@@ -1,0 +1,16 @@
+{
+  "@@locale": "ja",
+  "@@last_modified": "2022-04-10T13:49:17.352147",
+  "helloWorld": "Hello world jp!",
+  "@helloWorld": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "hello": "Hello jp",
+  "@hello": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  }
+}

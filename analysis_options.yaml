@@ -4,6 +4,7 @@ analyzer:
   exclude: [
       lib/**.g.dart,
       lib/configs/dependency_injection/injection.config.dart,
+      lib/localization/dart_files/**.dart,
   ]
 
 linter:

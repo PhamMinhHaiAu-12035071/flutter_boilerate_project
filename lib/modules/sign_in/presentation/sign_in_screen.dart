@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerate_project/configs/dependency_injection/injection.dart';
+import 'package:flutter_boilerate_project/localization/app_localization.dart';
 import 'package:flutter_boilerate_project/modules/theme/business_logic/theme_bloc.dart';
 import 'package:flutter_boilerate_project/modules/theme/constants/enums.dart';
 import 'package:flutter_boilerate_project/routers/e_page.dart';
@@ -34,7 +35,7 @@ class SignInView extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            const Text('This is sign in page'),
+            Text(AppLocalization.of(context)?.helloWorld ?? '-'),
             ElevatedButton(
               onPressed: _toggleTheme,
               child: const Text('change theme'),

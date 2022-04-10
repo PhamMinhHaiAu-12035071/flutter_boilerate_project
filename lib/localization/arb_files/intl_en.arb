@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2022-04-10T13:49:17.352147",
+  "helloWorld": "Hello world!",
+  "@helloWorld": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  },
+  "hello": "Hello",
+  "@hello": {
+    "type": "text",
+    "placeholders_order": [],
+    "placeholders": {}
+  }
+}
