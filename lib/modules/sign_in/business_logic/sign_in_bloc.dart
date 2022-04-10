@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_boilerate_project/modules/auth/data/api/json_models/token.dart';
 import 'package:flutter_boilerate_project/modules/auth/data/exceptions/login_failed_exception.dart';
-import 'package:flutter_boilerate_project/modules/auth/data/models/token.dart';
 import 'package:flutter_boilerate_project/modules/auth/data/repositories/authentication_repository.dart';
 import 'package:flutter_boilerate_project/modules/sign_in/models/models.dart';
 import 'package:flutter_boilerate_project/shared/data/exceptions/fetch_data_exception.dart';

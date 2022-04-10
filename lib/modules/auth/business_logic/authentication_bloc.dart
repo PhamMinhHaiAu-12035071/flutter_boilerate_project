@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_boilerate_project/modules/auth/constants/enums.dart';
-import 'package:flutter_boilerate_project/modules/auth/data/models/user.dart';
+import 'package:flutter_boilerate_project/modules/auth/data/api/json_models/user.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
