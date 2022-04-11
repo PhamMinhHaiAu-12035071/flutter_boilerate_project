@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerate_project/routers/e_page.dart';
+import 'package:flutter_boilerate_project/routers/navigation_cubit.dart';
+import 'package:flutter_boilerate_project/routers/routes.dart';
 
 class DetailProductScreen extends EPage {
   const DetailProductScreen({required Map<String, dynamic> args})
@@ -40,6 +43,8 @@ class DetailProductScreen extends EPage {
 class DetailProductView extends StatelessWidget {
   const DetailProductView({Key? key}) : super(key: key);
 
+  void _onNavigateToAnimationDemoPage(BuildContext context) =>
+      context.read<NavigationCubit>().push(Path.animationDemo);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +54,10 @@ class DetailProductView extends StatelessWidget {
       body: Center(
         child: Hero(
           tag: 'imageHero',
-          child: Image.network('https://picsum.photos/250?image=9'),
+          child: GestureDetector(
+            onTap: () => _onNavigateToAnimationDemoPage(context),
+            child: Image.network('https://picsum.photos/250?image=9'),
+          ),
         ),
       ),
     );
