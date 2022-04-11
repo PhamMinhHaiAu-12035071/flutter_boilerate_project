@@ -13,9 +13,9 @@ part 'sign_in_state.dart';
 
 @singleton
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc({required AuthenticationRepository authenticationRepository})
-      : _authenticationRepository = authenticationRepository,
-        super(const SignInState()) {
+  SignInBloc(
+    @Named('AuthenticationRepositoryImpl') this._authenticationRepository,
+  ) : super(const SignInState()) {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
     on<SignInSubmitted>(_onSubmitted);

@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerate_project/configs/dependency_injection/injection.config.dart';
 import 'package:flutter_boilerate_project/configs/flavors/flavor_config.dart';
+import 'package:flutter_boilerate_project/modules/auth/data/api/json_models/token.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
@@ -11,7 +13,7 @@ import 'package:logger/logger.dart';
 final getIt = GetIt.instance;
 
 @InjectableInit(
-  generateForDir: ['lib'],
+  generateForDir: [''],
   initializerName: r'$initGetIt', // default
   preferRelativeImports: true, // default
   asExtension: false, // default
@@ -57,4 +59,21 @@ abstract class DioModule {
           },
         ),
       );
+}
+
+const String tokenBoxName = 'tokenBox';
+
+@module
+abstract class HiveModule {
+  @Named('tokenBoxName')
+  String get tokenBoxName => 'tokenBox';
+
+  @preResolve
+  @singleton
+  Future<HiveInterface> get hive async {
+    await Hive.initFlutter();
+    Hive.registerAdapter(TokenAdapter());
+    await Hive.openBox<Token>(tokenBoxName);
+    return Hive;
+  }
 }

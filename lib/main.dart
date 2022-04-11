@@ -11,14 +11,12 @@ import 'package:flutter_boilerate_project/routers/e_router_delegate.dart';
 import 'package:flutter_boilerate_project/routers/navigation_cubit.dart';
 import 'package:flutter_boilerate_project/routers/page_config.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:logger/logger.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   await configureDependencies();
-  await Hive.initFlutter();
   BlocOverrides.runZoned(
     () => runApp(const MyApp()),
     blocObserver: getIt<AppBlocObserver>(),
