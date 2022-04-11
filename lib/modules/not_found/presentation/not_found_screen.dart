@@ -7,8 +7,22 @@ class NotFoundScreen extends EPage {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('This is not found screen'),
+    return const NotFoundView();
+  }
+}
+
+class NotFoundView extends StatelessWidget {
+  const NotFoundView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Not found screen'),
+      ),
+      body: const Center(
+        child: Text('This is not found screen'),
+      ),
     );
   }
 }
