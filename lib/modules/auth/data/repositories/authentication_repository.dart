@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_boilerate_project/modules/auth/constants/enums.dart';
 import 'package:flutter_boilerate_project/modules/auth/data/api/json_models/token.dart';
 
 abstract class AuthenticationRepository {
@@ -7,5 +8,6 @@ abstract class AuthenticationRepository {
     required String password,
   });
 
-  void stop();
+  Stream<AuthenticationStatus> get status;
+  void dispose();
 }

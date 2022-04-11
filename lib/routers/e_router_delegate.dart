@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilerate_project/configs/dependency_injection/injection.dart';
 import 'package:flutter_boilerate_project/modules/auth/business_logic/authentication_bloc.dart';
 import 'package:flutter_boilerate_project/modules/auth/constants/enums.dart';
 import 'package:flutter_boilerate_project/routers/custom_route_observer.dart';
@@ -25,14 +26,7 @@ class ERouterDelegate extends RouterDelegate<PageConfig>
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => _cubit),
-        BlocProvider(
-          create: (_) => AuthenticationBloc()
-            ..add(
-              const AuthenticationStatusChanged(
-                AuthenticationStatus.unauthenticated,
-              ),
-            ),
-        ),
+        BlocProvider(create: (_) => getIt<AuthenticationBloc>()),
       ],
       child: MultiBlocListener(
         listeners: [

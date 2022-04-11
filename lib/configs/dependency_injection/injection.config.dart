@@ -12,6 +12,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i7;
 
 import '../../app_bloc_observer.dart' as _i15;
+import '../../modules/auth/business_logic/authentication_bloc.dart' as _i19;
 import '../../modules/auth/data/api/json_parsers/token_parser.dart' as _i9;
 import '../../modules/auth/data/api/json_parsers/user_error_parser.dart'
     as _i14;
@@ -27,7 +28,7 @@ import '../../modules/auth/data/repositories/token_repository.dart' as _i10;
 import '../../modules/sign_in/business_logic/sign_in_bloc.dart' as _i18;
 import '../../modules/theme/business_logic/theme_bloc.dart' as _i8;
 import '../../shared/services/client_common.dart' as _i4;
-import 'injection.dart' as _i19; // ignore_for_file: unnecessary_lambdas
+import 'injection.dart' as _i20; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -66,13 +67,16 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.singleton<_i18.SignInBloc>(_i18.SignInBloc(
       get<_i16.AuthenticationRepository>(
           instanceName: 'AuthenticationRepositoryImpl')));
+  gh.singleton<_i19.AuthenticationBloc>(_i19.AuthenticationBloc(
+      get<_i16.AuthenticationRepository>(
+          instanceName: 'AuthenticationRepositoryImpl')));
   return get;
 }
 
-class _$HttpModule extends _i19.HttpModule {}
+class _$HttpModule extends _i20.HttpModule {}
 
-class _$DioModule extends _i19.DioModule {}
+class _$DioModule extends _i20.DioModule {}
 
-class _$HiveModule extends _i19.HiveModule {}
+class _$HiveModule extends _i20.HiveModule {}
 
-class _$LoggerModule extends _i19.LoggerModule {}
+class _$LoggerModule extends _i20.LoggerModule {}

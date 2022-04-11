@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerate_project/configs/dependency_injection/injection.dart';
+import 'package:flutter_boilerate_project/modules/auth/constants/enums.dart';
 import 'package:flutter_boilerate_project/modules/auth/data/api/json_models/token.dart';
 import 'package:flutter_boilerate_project/modules/auth/data/api/json_parsers/token_parser.dart';
 import 'package:flutter_boilerate_project/modules/auth/data/api/json_parsers/user_error_parser.dart';
@@ -15,13 +17,26 @@ import 'package:injectable/injectable.dart';
 @Named('AuthenticationRepositoryImpl')
 @Singleton(as: AuthenticationRepository)
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
-  const AuthenticationRepositoryImpl(
+  AuthenticationRepositoryImpl(
     @Named('UserApiImpl') this._userAPI,
     @Named('TokenOfflineRepositoryImpl') this._tokenRepository,
   );
 
   final UserAPI _userAPI;
   final TokenRepository _tokenRepository;
+  final _controller = StreamController<AuthenticationStatus>();
+
+  @override
+  Stream<AuthenticationStatus> get status async* {
+    await Future<void>.delayed(const Duration(milliseconds: 150));
+    final sizes = await _tokenRepository.getSizes();
+    if (sizes > 0) {
+      yield AuthenticationStatus.authenticated;
+    } else {
+      yield AuthenticationStatus.unauthenticated;
+    }
+    yield* _controller.stream;
+  }
 
   @override
   Future<Either<Exception, Token>> login({
@@ -51,5 +66,5 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  void stop() {}
+  void dispose() => _controller.close();
 }

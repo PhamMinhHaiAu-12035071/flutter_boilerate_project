@@ -10,6 +10,7 @@ import 'package:flutter_boilerate_project/routers/e_route_information_parser.dar
 import 'package:flutter_boilerate_project/routers/e_router_delegate.dart';
 import 'package:flutter_boilerate_project/routers/navigation_cubit.dart';
 import 'package:flutter_boilerate_project/routers/page_config.dart';
+import 'package:flutter_boilerate_project/routers/routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:logger/logger.dart';
 
@@ -18,19 +19,22 @@ Future<void> main() async {
   usePathUrlStrategy();
   await configureDependencies();
   BlocOverrides.runZoned(
-    () => runApp(const MyApp()),
+    () => runApp(
+      const App(),
+    ),
     blocObserver: getIt<AppBlocObserver>(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   ERouteInformationParser get routeInformationParser =>
       ERouteInformationParser();
 
-  ERouterDelegate get routerDelegate =>
-      ERouterDelegate(cubit: NavigationCubit([PageConfig(location: '/')]));
+  ERouterDelegate get routerDelegate => ERouterDelegate(
+        cubit: NavigationCubit([PageConfig(location: Path.splashScreen)]),
+      );
 
   @override
   Widget build(BuildContext context) {

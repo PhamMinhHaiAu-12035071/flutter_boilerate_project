@@ -78,4 +78,9 @@ class NavigationStack {
       ..addAll(configs);
     return NavigationStack(_stack);
   }
+
+  @override
+  String toString() {
+    return _stack.toString();
+  }
 }

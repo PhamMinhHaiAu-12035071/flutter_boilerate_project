@@ -2,5 +2,6 @@ import 'package:flutter_boilerate_project/modules/auth/data/api/json_models/toke
 
 abstract class TokenRepository {
   Future<void> create(Token token);
-  void stop();
+  Future<List<Token>> getAll();
+  Future<int> getSizes();
 }

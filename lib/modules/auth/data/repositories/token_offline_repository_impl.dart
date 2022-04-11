@@ -19,5 +19,8 @@ class TokenOfflineRepositoryImpl implements TokenRepository {
   }
 
   @override
-  void stop() {}
+  Future<List<Token>> getAll() => Future.value(box.values.toList());
+
+  @override
+  Future<int> getSizes() => Future.value(box.length);
 }
